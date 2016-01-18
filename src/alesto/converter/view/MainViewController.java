@@ -79,33 +79,27 @@ public class MainViewController {
 
     /**
      * Copies code from text fields to clipboard for further use. Sorry for that mess, have no idea how to handle it yet.
-     * TODO: refactor two methods below.
      */
     @FXML
     public void copyToClipboardRaw() {
-        if(code == null || code.isEmpty()) {
-            nothingToCopyAlert();
-        } else {
-            Clipboard clipboard = Clipboard.getSystemClipboard();
-            ClipboardContent content = new ClipboardContent();
-            content.putString(rawCode.getText());
-            clipboard.setContent(content);
-        }
+        copyToClipboard(rawCode);
     }
 
     @FXML
     public void copyToClipboardHTML() {
+        copyToClipboard(codeForHTML);
+    }
+
+    public void copyToClipboard(TextField source) {
         if(code == null || code.isEmpty()) {
             nothingToCopyAlert();
         } else {
             Clipboard clipboard = Clipboard.getSystemClipboard();
             ClipboardContent content = new ClipboardContent();
-            content.putString(codeForHTML.getText());
+            content.putString(source.getText());
             clipboard.setContent(content);
         }
     }
-
-
     /**********************************/
     /**
      * Is called by the main application to give a reference back to itself.
